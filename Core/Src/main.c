@@ -94,10 +94,13 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (true)
   {
-	  /* Toggle Status Of The LED */
-	  HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_10);
-	  /* Waiting A Second For Visibility For Human Vision */
-	  HAL_Delay((uint32_t)1000);
+	  /* Checks Status Of The Key, If The Status Is Set Then */
+	  if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_9) == GPIO_PIN_SET)
+		  /* Sets Status Of The LED */
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, GPIO_PIN_SET);
+	  else
+		  /* Resets Status Of The LED */
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, GPIO_PIN_RESET);
 
     /* USER CODE END WHILE */
 
@@ -170,6 +173,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pin = GPIO_PIN_8;
   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PA9 */
+  GPIO_InitStruct.Pin = GPIO_PIN_9;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PA10 */
