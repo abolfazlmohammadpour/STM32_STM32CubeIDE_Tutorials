@@ -94,12 +94,8 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (true)
   {
-	  /* Set Status Of The LED */
-	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, GPIO_PIN_SET);
-	  /* Waiting A Second For Visibility For Human Vision */
-	  HAL_Delay((uint32_t)1000);
-	  /* Reset Status Of The LED */
-	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, GPIO_PIN_RESET);
+	  /* Toggle Status Of The LED */
+	  HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_10);
 	  /* Waiting A Second For Visibility For Human Vision */
 	  HAL_Delay((uint32_t)1000);
 
