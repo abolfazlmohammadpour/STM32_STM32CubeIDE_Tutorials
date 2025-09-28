@@ -88,19 +88,28 @@ int main(void)
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
 
+  /* Turns Off The LED */
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, GPIO_PIN_RESET);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (true)
   {
-	  /* Checks Status Of The Key, If The Status Is Set Then */
-	  if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_9) == GPIO_PIN_SET)
-		  /* Sets Status Of The LED */
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, GPIO_PIN_SET);
+	  /* Checks Status Of The Button */
+	  if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_9) == GPIO_PIN_RESET)
+	  {
+		  /* Toggles Status Of The LED Each 100 MilliSeconds */
+		  HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_10);
+		  HAL_Delay((uint32_t)100);
+	  }
 	  else
-		  /* Resets Status Of The LED */
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, GPIO_PIN_RESET);
+	  {
+		  /* Toggles Status Of The LED Each 1000 MilliSeconds */
+		  HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_10);
+		  HAL_Delay((uint32_t)1000);
+	  }
 
     /* USER CODE END WHILE */
 
